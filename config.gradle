@@ -1,0 +1,33 @@
+ext {
+    android = [
+            compileSdkVersion: 31,
+            targetSdkVersion : 31,
+            minSdkVersion    : 26,
+            versionName      : "1.0",
+            versionCode      : 1,
+    ]
+
+    version = [
+            lifecycle_version: '2.4.0',
+            okhttp_version  : '4.9.0',
+            retrofit_version: '2.9.0',
+    ]
+
+    dependencies = [
+            "okhttp3"                : "com.squareup.okhttp3:okhttp:$version.okhttp_version",
+            "logging-interceptor"    : "com.squareup.okhttp3:logging-interceptor:$version.okhttp_version",
+            "retrofit2"              : "com.squareup.retrofit2:retrofit:$version.retrofit_version",
+            "converter-gson"         : "com.squareup.retrofit2:converter-gson:$version.retrofit_version",
+            "gson"                   : 'com.google.code.gson:gson:2.8.9',
+            "lifecycle-viewmodel-ktx": "androidx.lifecycle:lifecycle-viewmodel-ktx:$version.lifecycle_version",
+            "livedata-ktx"           : "androidx.lifecycle:lifecycle-livedata-ktx:$version.lifecycle_version",
+            "activity-ktx"           : "androidx.activity:activity-ktx:1.3.1",
+            "fragment-ktx"           : "androidx.fragment:fragment-ktx:1.3.3",
+            "material"               : "com.google.android.material:material:1.4.0-alpha01",
+            "core-ktx"               : 'androidx.core:core-ktx:1.7.0',
+            //为了不引入Context，先用LiveDataBus发送toast
+            "livedatabus"        : 'io.github.jeremyliao:live-event-bus-x:1.8.0',
+    ]
+
+
+}
