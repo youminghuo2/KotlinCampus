@@ -1,8 +1,8 @@
-package com.example.kotlincampus.base
+package com.example.base.base
 
 /**
  * @Description:
- * @CreateDate: 2021/12/3 15:47
+ * @CreateDate: 2021/12/6 14:58
  */
 interface IUiView {
     fun showLoading()

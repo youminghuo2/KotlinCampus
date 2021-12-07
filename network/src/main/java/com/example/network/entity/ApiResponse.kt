@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.network.entity
 
 import java.io.Serializable
 

@@ -1,6 +1,6 @@
 package com.example.kotlincampus.net
 
-import com.example.network.RetrofitManager
+import com.example.network.base.RetrofitManager
 import okhttp3.OkHttpClient
 
 /**
@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
  * @CreateDate: 2021/12/3 11:27
  */
 object RetrofitClient : RetrofitManager() {
-    val service by lazy { getService(ApiService::class.java) }
+    val service by lazy { getService(ApiService::class.java,ApiService.BASE_URL) }
 
     override fun handleBuilder(builder: OkHttpClient.Builder) = Unit
 }

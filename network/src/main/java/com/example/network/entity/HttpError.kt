@@ -1,5 +1,6 @@
-package com.example.network
+package com.example.network.entity
 
+import com.example.network.toast
 import com.google.gson.JsonParseException
 import retrofit2.HttpException
 import java.net.SocketTimeoutException

@@ -1,6 +1,7 @@
-package com.example.network
+package com.example.network.base
 
 import androidx.viewbinding.BuildConfig
+import com.example.network.entity.*
 import kotlinx.coroutines.delay
 
 /**
@@ -8,7 +9,9 @@ import kotlinx.coroutines.delay
  * @CreateDate: 2021/12/3 11:07
  */
 open class BaseRepository {
+
     suspend fun <T> executeHttp(block: suspend () -> ApiResponse<T>): ApiResponse<T> {
+        //for test
         delay(500)
         runCatching {
             block.invoke()
@@ -36,6 +39,7 @@ open class BaseRepository {
         return if (data.isSuccess) {
             getHttpSuccessResponse(data)
         } else {
+//            handlingApiExceptions(data.errorCode, data.errorMsg)
             ApiFailedResponse(data.code, data.msg)
         }
     }
@@ -51,4 +55,5 @@ open class BaseRepository {
             ApiSuccessResponse(data)
         }
     }
+
 }

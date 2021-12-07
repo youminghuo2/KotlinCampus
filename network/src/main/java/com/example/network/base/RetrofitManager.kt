@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.network.base
 
 import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient
@@ -13,17 +13,15 @@ import java.util.concurrent.TimeUnit
  */
 abstract class RetrofitManager {
     companion object CLIENT {
-        private const val TIME_OUT = 10L
-        private const val BASE_URL = "http://101.133.155.220:18080/"
+        private const val TIME_OUT = 5L
     }
 
     private val client: OkHttpClient by lazy {
         val builder = OkHttpClient.Builder()
             .addInterceptor(getHttpLoggingInterceptor())
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-
+//            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+//            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
         handleBuilder(builder)
         builder.build()
     }
@@ -41,7 +39,7 @@ abstract class RetrofitManager {
 
     abstract fun handleBuilder(builder: OkHttpClient.Builder)
 
-    open fun <T> getService(serviceClass: Class<T>, baseUrl: String = BASE_URL): T {
+    open fun <T> getService(serviceClass: Class<T>, baseUrl: String): T {
         return Retrofit.Builder()
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())

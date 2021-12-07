@@ -1,9 +1,7 @@
 package com.example.kotlincampus.net
-
 import com.example.kotlincampus.entity.LoginEntity
-import com.example.network.ApiResponse
+import com.example.network.entity.ApiResponse
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Query
 
 /**
@@ -18,5 +16,9 @@ interface ApiService {
         @Query("encryptPwd") encryptPwd: String,
         @Query("clientType") clientType: String,
         @Query("clientVersion") clientVersion: String
-    ):ApiResponse<LoginEntity>
+    ): ApiResponse<LoginEntity?>
+
+    companion object {
+        const val BASE_URL = "http://101.133.155.220:28080/"
+    }
 }

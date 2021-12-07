@@ -1,13 +1,15 @@
-package com.example.kotlincampus.base
+package com.example.base.util
 
 import androidx.lifecycle.lifecycleScope
-import com.example.network.*
+import com.example.base.base.BaseActivity
+import com.example.network.ResultBuilder
+import com.example.network.entity.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 /**
  * @Description:
- * @CreateDate: 2021/12/3 15:49
+ * @CreateDate: 2021/12/6 15:21
  */
 fun <T> launchFlow(
     requestBlock: suspend () -> ApiResponse<T>,

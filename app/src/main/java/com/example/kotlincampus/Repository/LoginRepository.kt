@@ -1,10 +1,10 @@
-package com.example.kotlincampus.view
+package com.example.kotlincampus.Repository
 
 import com.example.kotlincampus.entity.LoginEntity
-import com.example.kotlincampus.net.ApiService
 import com.example.kotlincampus.net.RetrofitClient
-import com.example.network.ApiResponse
-import com.example.network.BaseRepository
+
+import com.example.network.base.BaseRepository
+import com.example.network.entity.ApiResponse
 
 /**
  * @Description:
@@ -16,7 +16,7 @@ class LoginRepository : BaseRepository() {
     }
 
 
-    suspend fun login(username: String, password: String, clientType: String, clientVersion: String): ApiResponse<LoginEntity> {
+    suspend fun login(username: String, password: String, clientType: String, clientVersion: String): ApiResponse<LoginEntity?> {
         return executeHttp {
             mService.login(username, password, clientType, clientVersion)
         }
