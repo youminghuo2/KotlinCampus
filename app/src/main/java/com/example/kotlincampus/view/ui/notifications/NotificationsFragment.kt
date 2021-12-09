@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.kotlincampus.view.R
-import com.example.kotlincampus.view.databinding.FragmentNotificationsBinding
+import com.example.kotlincampus.databinding.FragmentNotificationsBinding
+
 
 class NotificationsFragment : Fragment() {
 

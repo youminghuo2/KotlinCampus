@@ -17,7 +17,7 @@
     <string name="psd">密码</string>
     <string name="welcome_text">看视频，上牛逼</string>
     <string name="login">确定</string>
-    <string name="privacy">请同意用户协议及遵守相关法律法规</string>
+    <string name="privacy">用户协议</string>
     <string name="privacy_check">请勾选相关用户协议</string>
     <string name="acc_null">账号不能为空</string>
     <string name="psd_null">密码不能为空</string>

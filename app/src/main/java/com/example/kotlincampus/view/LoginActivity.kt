@@ -2,8 +2,12 @@ package com.example.kotlincampus.view
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
@@ -34,6 +38,34 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        /**
+         *用户协议
+         */
+        val privacyText = getString(R.string.privacy_check)
+        val privacy = getString(R.string.privacy)
+        val spanSpannableString = SpannableString(privacyText)
+        spanSpannableString.setSpan(
+            getColor(R.color.green),
+            privacy.indexOf(privacy),
+            privacy.indexOf(privacy) + privacy.length,
+            SpannableString.SPAN_INCLUSIVE_INCLUSIVE
+        )
+        spanSpannableString.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    startActivity<PrivacyActivity>()
+                }
+
+            },
+            spanSpannableString.indexOf(privacy),
+            spanSpannableString.indexOf(privacy) + privacy.length,
+            SpannableString.SPAN_INCLUSIVE_INCLUSIVE
+        )
+
+        binding.privacyTv.text = spanSpannableString
+        binding.privacyTv.movementMethod = LinkMovementMethod.getInstance()
+        binding.privacyTv.highlightColor = getColor(android.R.color.transparent)
 
         binding.loginBtn.setOnClickListener {
             if (!binding.privacyCheckbox.isChecked) {

@@ -52,8 +52,8 @@
         android:maxWidth="@dimen/dp_150"
         android:minWidth="@dimen/dp_88"
         app:counterMaxLength="15"
-        app:errorEnabled="true"
         app:endIconMode="password_toggle"
+        app:errorEnabled="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/acc_textField"
@@ -68,14 +68,22 @@
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/privacy_checkbox"
         android:layout_width="wrap_content"
+       android:minWidth="@dimen/dp_30"
         android:layout_height="wrap_content"
-        android:text="@string/privacy"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/psd_textField" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/privacy_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/privacy_checkbox"
+        app:layout_constraintLeft_toRightOf="@id/privacy_checkbox"
+        app:layout_constraintTop_toTopOf="@id/privacy_checkbox" />
+
     <com.google.android.material.button.MaterialButton
-        style="@style/button"
         android:id="@+id/login_btn"
+        style="@style/button"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_50"

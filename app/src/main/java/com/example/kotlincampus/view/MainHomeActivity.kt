@@ -7,7 +7,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.kotlincampus.view.databinding.ActivityMainHomeBinding
+import com.example.kotlincampus.R
+import com.example.kotlincampus.databinding.ActivityMainHomeBinding
+
 
 class MainHomeActivity : AppCompatActivity() {
 
