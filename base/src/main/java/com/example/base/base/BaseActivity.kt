@@ -2,6 +2,7 @@ package com.example.base.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.network.SHOW_TOAST
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -10,7 +11,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus
  * @Description:
  * @CreateDate: 2021/12/3 15:44
  */
-abstract class BaseActivity: AppCompatActivity(), IUiView {
+abstract class BaseActivity : AppCompatActivity(), IUiView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +20,7 @@ abstract class BaseActivity: AppCompatActivity(), IUiView {
 
     private fun observeUi() {
         LiveEventBus.get<String>(SHOW_TOAST).observe(this) {
-           com.example.base.util.toast(it)
+            com.example.base.util.toast(it)
         }
     }
 

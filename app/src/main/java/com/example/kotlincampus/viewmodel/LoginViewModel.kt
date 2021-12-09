@@ -2,7 +2,7 @@ package com.example.kotlincampus.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.kotlincampus.entity.LoginEntity
-import com.example.kotlincampus.Repository.LoginRepository
+import com.example.kotlincampus.repository.LoginRepository
 import com.example.network.entity.ApiResponse
 
 /**

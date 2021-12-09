@@ -20,8 +20,8 @@ abstract class RetrofitManager {
         val builder = OkHttpClient.Builder()
             .addInterceptor(getHttpLoggingInterceptor())
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-//            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-//            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
         handleBuilder(builder)
         builder.build()
     }

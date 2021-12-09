@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/KotlinCampus/app/src/main/res/layout/activity_login.xml" value="0.203125" />
+        <entry key="..\:/KotlinCampus/app/src/main/res/drawable/account.xml" value="0.26481481481481484" />
+        <entry key="..\:/KotlinCampus/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/KotlinCampus/app/src/main/res/layout/activity_main.xml" value="0.291213768115942" />
+        <entry key="..\:/KotlinCampus/app/src/main/res/layout/activity_splash.xml" value="0.209375" />
+        <entry key="..\:/KotlinCampus/app/src/main/res/layout/activity_splashscreen.xml" value="0.2" />
+        <entry key="..\:/KotlinCampus/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22916666666666666" />
+        <entry key="..\:/KotlinCampus/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22916666666666666" />
         <entry key="..\:/KotlinCampus/base/src/main/res/layout/activity_base_tool_bar.xml" value="0.20878623188405798" />
       </map>
     </option>

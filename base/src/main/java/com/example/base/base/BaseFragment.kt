@@ -1,5 +1,6 @@
 package com.example.base.base
 
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.example.base.anno.FragmentConfiguration
 

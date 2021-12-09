@@ -1,4 +1,4 @@
-package com.example.kotlincampus.Repository
+package com.example.kotlincampus.repository
 
 import com.example.kotlincampus.entity.LoginEntity
 import com.example.kotlincampus.net.RetrofitClient
@@ -14,7 +14,6 @@ class LoginRepository : BaseRepository() {
     private val mService by lazy {
         RetrofitClient.service
     }
-
 
     suspend fun login(username: String, password: String, clientType: String, clientVersion: String): ApiResponse<LoginEntity?> {
         return executeHttp {
