@@ -1,6 +1,8 @@
 package com.example.kotlincampus.net
+import com.example.kotlincampus.entity.BannerEntity
 import com.example.kotlincampus.entity.LoginEntity
 import com.example.network.entity.ApiResponse
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -21,4 +23,7 @@ interface ApiService {
     companion object {
         const val BASE_URL = "http://101.133.155.220:28080/"
     }
+
+    @GET("portal/index/poster/list/bylocation")
+    suspend fun getBannerList(@Query("locations") locations: String): ApiResponse<List<BannerEntity>>
 }

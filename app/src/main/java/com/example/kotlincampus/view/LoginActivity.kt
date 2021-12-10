@@ -19,16 +19,13 @@ import com.example.kotlincampus.R
 import com.example.kotlincampus.databinding.ActivityLoginBinding
 
 import com.example.kotlincampus.viewmodel.LoginViewModel
-import com.example.network.SHOW_TOAST
 
 import com.example.network.toast
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val viewmodel: LoginViewModel by viewModels()
+    private val model: LoginViewModel by viewModels()
 
     companion object {
         private const val tag = "LoginActivity"
@@ -109,7 +106,7 @@ class LoginActivity : BaseActivity() {
 
     private fun login() {
         launchWithLoadingAndCollect({
-            viewmodel.login(
+            model.login(
                 "zhu0001", "e10adc3949ba59abbe56e057f20f883e111", "ANDROID",
                 "2.7.5"
             )

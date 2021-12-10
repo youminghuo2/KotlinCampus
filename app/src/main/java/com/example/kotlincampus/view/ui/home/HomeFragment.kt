@@ -4,16 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
+import com.example.base.base.BaseFragment
+import com.example.base.util.launchAndCollect
 import com.example.kotlincampus.databinding.FragmentHomeBinding
+import com.example.kotlincampus.entity.BannerEntity
+import com.example.kotlincampus.net.Constants
+import com.youth.banner.adapter.BannerImageAdapter
+import com.youth.banner.holder.BannerImageHolder
+import com.youth.banner.indicator.CircleIndicator
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val model: HomeViewModel by viewModels()
+
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -25,17 +31,44 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initBanner()
+    }
+
+    private fun initBanner() {
+        binding.banner.setBannerRound(20F)
+        launchAndCollect({ model.getBannerList(Constants.banner_type) }) {
+            onSuccess = {
+                it?.let {
+                    initUserBanner(it)
+                }
+
+            }
+        }
+    }
+
+    /**
+     * banner占位图广告位
+     */
+    private fun initUserBanner(list: List<BannerEntity>) {
+        binding.banner.setAdapter(object : BannerImageAdapter<BannerEntity>(list) {
+            override fun onBindView(
+                holder: BannerImageHolder,
+                data: BannerEntity,
+                position: Int,
+                size: Int
+            ) {
+                Glide.with(holder.itemView).load(data.hrefUrl).into(holder.imageView)
+            }
         })
-        return root
+            .setIndicator(CircleIndicator(context))
+            .addBannerLifecycleObserver(this)
+
     }
 
     override fun onDestroyView() {
