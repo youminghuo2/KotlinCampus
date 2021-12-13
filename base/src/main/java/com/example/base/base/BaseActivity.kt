@@ -2,6 +2,7 @@ package com.example.base.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.network.SHOW_TOAST
@@ -13,9 +14,14 @@ import com.jeremyliao.liveeventbus.LiveEventBus
  */
 abstract class BaseActivity : AppCompatActivity(), IUiView {
 
+    companion object {
+        private const val TAG = "当前的activity:"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observeUi()
+        Log.d(TAG, javaClass.simpleName)
     }
 
     private fun observeUi() {

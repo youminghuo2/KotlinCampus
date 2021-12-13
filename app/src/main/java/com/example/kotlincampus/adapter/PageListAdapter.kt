@@ -11,10 +11,12 @@ import com.example.kotlincampus.entity.PageDate
 
 
 /**
- * @Description:
+ * @Description:DiffUtil
  * @CreateDate: 2021/12/13 9:10
  */
-class PageListAdapter(private val dataList: List<PageDate>) :
+
+//listAdapter
+class PageListAdapter :
     ListAdapter<PageDate, PageListAdapter.MyViewHolder>(PageListDiffCallback()) {
 
     inner class MyViewHolder(val binding: ItemPageListBinding) :
@@ -34,6 +36,7 @@ class PageListAdapter(private val dataList: List<PageDate>) :
 
 }
 
+// DiffUtil
 class PageListDiffCallback : DiffUtil.ItemCallback<PageDate>() {
     override fun areItemsTheSame(oldItem: PageDate, newItem: PageDate): Boolean {
         return oldItem.encryptedId == newItem.encryptedId

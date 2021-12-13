@@ -25,7 +25,7 @@ interface ApiService {
     ): ApiResponse<LoginEntity?>
 
     companion object {
-        const val BASE_URL = "http://101.133.155.220:18080/"
+        const val BASE_URL = "http://101.133.155.220:28080/"
     }
 
     @GET("portal/index/poster/list/bylocation")

@@ -5,26 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.base.base.BaseFragment
 import com.example.base.util.launchAndCollect
-import com.example.base.util.launchFlow
-import com.example.base.util.launchWithLoading
 import com.example.base.util.launchWithNotLoading
 import com.example.kotlincampus.adapter.PageListAdapter
 import com.example.kotlincampus.databinding.FragmentHomeBinding
 import com.example.kotlincampus.entity.BannerEntity
 import com.example.kotlincampus.entity.PageDate
-import com.example.kotlincampus.entity.PageListEntity
 import com.example.kotlincampus.net.Constants
 import com.example.network.observeState
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 
 
 class HomeFragment : BaseFragment() {
@@ -54,15 +47,12 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBanner()
-        initPageList()
+        init()
     }
 
-    private fun initPageList() {
-
-
-        launchWithNotLoading { model.getPageList(pageNumber, pageSize) }
-
-        listAdapter = PageListAdapter(list)
+    private fun init() {
+        initPageList()
+        listAdapter = PageListAdapter()
         binding.recyclerView.adapter = listAdapter
 
         model.pageLiveData.observeState(this) {
@@ -73,21 +63,22 @@ class HomeFragment : BaseFragment() {
                 }
             }
         }
-
     }
 
+    private fun initPageList() {
+        launchWithNotLoading { model.getPageList(pageNumber, pageSize) }
+    }
 
     private fun initBanner() {
-        binding.banner.setBannerRound(20F)
         launchAndCollect({ model.getBannerList(Constants.banner_type) }) {
             onSuccess = {
                 it?.let {
                     initUserBanner(it)
                 }
-
             }
         }
     }
+
 
     /**
      * banner占位图广告位
@@ -105,7 +96,9 @@ class HomeFragment : BaseFragment() {
         })
             .setIndicator(CircleIndicator(context))
             .addBannerLifecycleObserver(this)
-
+            .setOnBannerListener { data, position ->
+                initPageList()
+            }
     }
 
     override fun onDestroyView() {

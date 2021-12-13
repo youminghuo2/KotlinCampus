@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/dp_10"
     tools:context=".view.ui.home.HomeFragment">
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_150"
-        app:banner_loop_time="3000"
+        app:banner_radius="@dimen/dp_25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,6 +19,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="@dimen/dp_0"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_height="@dimen/dp_0"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_30"
-        android:text="仅供学习，如有问题请联系QQ909963291，此QQ承担一切后果"
+        android:text="仅供学习交流，严禁用于商业用途，请于24小时内删除"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
