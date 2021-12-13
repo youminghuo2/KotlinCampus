@@ -5,15 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.base.base.BaseFragment
 import com.example.base.util.launchAndCollect
+import com.example.base.util.launchFlow
+import com.example.base.util.launchWithLoading
+import com.example.base.util.launchWithNotLoading
+import com.example.kotlincampus.adapter.PageListAdapter
 import com.example.kotlincampus.databinding.FragmentHomeBinding
 import com.example.kotlincampus.entity.BannerEntity
+import com.example.kotlincampus.entity.PageDate
+import com.example.kotlincampus.entity.PageListEntity
 import com.example.kotlincampus.net.Constants
+import com.example.network.observeState
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : BaseFragment() {
@@ -25,6 +36,11 @@ class HomeFragment : BaseFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val pageSize = Constants.page_size
+    private var pageNumber = 1
+    private lateinit var listAdapter: PageListAdapter
+    private var list = listOf<PageDate>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +54,28 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBanner()
+        initPageList()
     }
+
+    private fun initPageList() {
+
+
+        launchWithNotLoading { model.getPageList(pageNumber, pageSize) }
+
+        listAdapter = PageListAdapter(list)
+        binding.recyclerView.adapter = listAdapter
+
+        model.pageLiveData.observeState(this) {
+            onSuccess = {
+                it?.let {
+                    list = it.dataList
+                    listAdapter.submitList(list)
+                }
+            }
+        }
+
+    }
+
 
     private fun initBanner() {
         binding.banner.setBannerRound(20F)
@@ -63,7 +100,7 @@ class HomeFragment : BaseFragment() {
                 position: Int,
                 size: Int
             ) {
-                Glide.with(holder.itemView).load(data.hrefUrl).into(holder.imageView)
+                Glide.with(holder.itemView).load(data.pictureUrl).into(holder.imageView)
             }
         })
             .setIndicator(CircleIndicator(context))

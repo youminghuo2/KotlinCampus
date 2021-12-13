@@ -6,5 +6,7 @@ package com.example.kotlincampus.net
  */
 object Constants {
    const val banner_type="APP_INDEX"
+
+   const val page_size=20
 }
 

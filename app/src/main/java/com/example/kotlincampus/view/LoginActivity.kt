@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity() {
         val privacy = getString(R.string.privacy)
         val spanSpannableString = SpannableString(privacyText)
         spanSpannableString.setSpan(
-            getColor(R.color.green),
+            getColor(R.color.purple_500),
             privacy.indexOf(privacy),
             privacy.indexOf(privacy) + privacy.length,
             SpannableString.SPAN_INCLUSIVE_INCLUSIVE
@@ -107,8 +107,8 @@ class LoginActivity : BaseActivity() {
     private fun login() {
         launchWithLoadingAndCollect({
             model.login(
-                "zhu0001", "e10adc3949ba59abbe56e057f20f883e111", "ANDROID",
-                "2.7.5"
+                "zhu0001", "e10adc3949ba59abbe56e057f20f883e", "ANDROID",
+                "2.7.8"
             )
         }) {
             onSuccess = {

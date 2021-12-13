@@ -40,6 +40,14 @@ fun BaseActivity.launchWithLoading(requestBlock: suspend () -> Unit) {
     }
 }
 
+fun BaseFragment.launchWithNotLoading(requestBlock: suspend () -> Unit) {
+    lifecycleScope.launch {
+        flow {
+            emit(requestBlock())
+        }.collect()
+    }
+}
+
 /**
  * 请求不带Loading&&不需要声明LiveData
  */
