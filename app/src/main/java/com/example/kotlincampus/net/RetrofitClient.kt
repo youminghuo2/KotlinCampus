@@ -1,6 +1,5 @@
 package com.example.kotlincampus.net
 
-import com.example.network.base.RetrofitManager
 import okhttp3.OkHttpClient
 
 /**

@@ -20,34 +20,37 @@ import okhttp3.Response
  * @CreateDate: 2021/12/14 14:02
  */
 class HeaderInterceptor : Interceptor {
-    private val key = stringPreferencesKey("token")
+    private val key = stringPreferencesKey(Constants.token_key)
+    private val refreshKey = stringPreferencesKey(Constants.refresh_token)
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
-        val responseToken = chain.request().headers["access-control-expose-headers"]
-
         val exampleCounterFlow: Flow<String> = context.dataStore.data
             .map { preferences ->
-                // No type safety.
                 preferences[key] ?: ""
             }
+
+        val originalRequest: Request = chain.request()
+        val response = chain.proceed(originalRequest)
+
+        val responseToken = response.headers["auth-jwt"].toString()
+        val refreshToken = response.headers["auth-jwt-refresh"].toString()
 
         MainScope().launch {
             val tokeData = exampleCounterFlow.first()
 
-            if (TextUtils.isEmpty(tokeData) && TextUtils.isEmpty(responseToken)) {
-                inCrementToken(tokeData)
+            if (TextUtils.isEmpty(tokeData) && !TextUtils.isEmpty(responseToken)) {
+                setDataToken(responseToken, refreshToken)
             }
-
         }
-        val originalRequest: Request = chain.request()
-        return chain.proceed(originalRequest)
 
+        return response
     }
 
-    suspend fun inCrementToken(token: String) {
+    private suspend fun setDataToken(token: String, refreshToken: String) {
         context.dataStore.edit { settings ->
             settings[key] = token
+            settings[refreshKey] = refreshToken
         }
     }
 

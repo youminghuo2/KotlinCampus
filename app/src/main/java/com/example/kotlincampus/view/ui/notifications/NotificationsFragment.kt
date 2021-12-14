@@ -5,10 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.kotlincampus.databinding.FragmentNotificationsBinding
+import com.example.kotlincampus.net.Constants
+import com.example.kotlincampus.utils.dataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 
 class NotificationsFragment : Fragment() {
@@ -36,6 +43,19 @@ class NotificationsFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.textNotifications.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val key = stringPreferencesKey(Constants.token_key)
+
+                notificationsViewModel._text.value =
+                    requireContext().dataStore.data.map { preferences -> preferences[key] ?: "" }
+                        .first()
+            }
+        }
     }
 
     override fun onDestroyView() {
