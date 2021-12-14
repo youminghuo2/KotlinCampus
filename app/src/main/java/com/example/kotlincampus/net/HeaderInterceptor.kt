@@ -1,0 +1,54 @@
+package com.example.kotlincampus.net
+
+import android.text.TextUtils
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import com.example.kotlincampus.App.Companion.context
+import com.example.kotlincampus.utils.dataStore
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import okhttp3.Interceptor
+import okhttp3.Request
+import okhttp3.Response
+
+
+/**
+ * @Description:添加拦截器，利用DataStore存储token
+ * @CreateDate: 2021/12/14 14:02
+ */
+class HeaderInterceptor : Interceptor {
+    private val key = stringPreferencesKey("token")
+
+    override fun intercept(chain: Interceptor.Chain): Response {
+
+        val responseToken = chain.request().headers["access-control-expose-headers"]
+
+        val exampleCounterFlow: Flow<String> = context.dataStore.data
+            .map { preferences ->
+                // No type safety.
+                preferences[key] ?: ""
+            }
+
+        MainScope().launch {
+            val tokeData = exampleCounterFlow.first()
+
+            if (TextUtils.isEmpty(tokeData) && TextUtils.isEmpty(responseToken)) {
+                inCrementToken(tokeData)
+            }
+
+        }
+        val originalRequest: Request = chain.request()
+        return chain.proceed(originalRequest)
+
+    }
+
+    suspend fun inCrementToken(token: String) {
+        context.dataStore.edit { settings ->
+            settings[key] = token
+        }
+    }
+
+}
