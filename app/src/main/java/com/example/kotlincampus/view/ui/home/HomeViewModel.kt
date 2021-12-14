@@ -17,7 +17,7 @@ class HomeViewModel : ViewModel() {
     }
 
     suspend fun getPageList(pageNum:Int, pageSize: Int) {
-        pageLiveData.value =repository.getPageList("",pageNum, pageSize)
+        pageLiveData.value =repository.getPageList(pageNum, pageSize)
     }
 
 }

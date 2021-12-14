@@ -32,5 +32,5 @@ interface ApiService {
     suspend fun getBannerList(@Query("location") locations: String): ApiResponse<List<BannerEntity>>
 
     @GET("cms/index/ysyx/appindex/postslist")
-    suspend fun getPageList(@Header("Auth-JWT") token:String, @Query("pageNum") pageNum: Int, @Query("pageSize") pageSize: Int):ApiResponse<PageListEntity>
+    suspend fun getPageList(@Query("pageNum") pageNum: Int, @Query("pageSize") pageSize: Int):ApiResponse<PageListEntity>
 }

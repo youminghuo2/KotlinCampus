@@ -23,9 +23,9 @@ class HomeRepository : BaseRepository() {
         }
     }
 
-    suspend fun getPageList(token:String,pageNum: Int, pageSize: Int): ApiResponse<PageListEntity> {
+    suspend fun getPageList(pageNum: Int, pageSize: Int): ApiResponse<PageListEntity> {
         return executeHttp {
-            mService.getPageList(token,pageNum, pageSize)
+            mService.getPageList(pageNum, pageSize)
         }
     }
 }
