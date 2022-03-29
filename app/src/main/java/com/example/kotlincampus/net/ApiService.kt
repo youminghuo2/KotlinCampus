@@ -33,4 +33,5 @@ interface ApiService {
 
     @GET("cms/index/ysyx/appindex/postslist")
     suspend fun getPageList(@Query("pageNum") pageNum: Int, @Query("pageSize") pageSize: Int):ApiResponse<PageListEntity>
+
 }

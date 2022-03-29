@@ -25,4 +25,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="message_switch">消息开关</string>
+    <string name="open_message">开启</string>
 </resources>

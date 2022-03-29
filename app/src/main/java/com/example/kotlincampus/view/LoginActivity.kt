@@ -107,8 +107,8 @@ class LoginActivity : BaseActivity() {
     private fun login() {
         launchWithLoadingAndCollect({
             model.login(
-                "zhu0001", "e10adc3949ba59abbe56e057f20f883e", "ANDROID",
-                "2.7.8"
+                "18014190570", "de88e3e4ab202d87754078cbb2df6063", "ANDROID",
+                "2.7.10"
             )
         }) {
             onSuccess = {
